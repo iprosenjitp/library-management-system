@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express';
 import { Book } from '../models/book.model';
 
-export const bookRouters = express.Router();
+export const bookRoutes = express.Router();
 
 // POST - Create book
-bookRouters.post('/', async (req: Request, res: Response) => {
+bookRoutes.post('/', async (req: Request, res: Response) => {
     try {
         const body = req.body;
         const book = await Book.create(body);
@@ -24,7 +24,7 @@ bookRouters.post('/', async (req: Request, res: Response) => {
 });
 
 // GET - Retrieve sll books
-bookRouters.get('/', async (req: Request, res: Response) => {
+bookRoutes.get('/', async (req: Request, res: Response) => {
     const filter = req.query.filter ? req.query.filter : "";
     const sortBy = req.query.sortBy ? req.query.sortBy : "";
     const sortOrder = req.query.sort ? req.query.sort : "asc";
@@ -44,7 +44,7 @@ bookRouters.get('/', async (req: Request, res: Response) => {
 });
 
 // GET - Retrieve single book
-bookRouters.get('/:bookId', async (req: Request, res: Response) => {
+bookRoutes.get('/:bookId', async (req: Request, res: Response) => {
     const bookId = req.params.bookId;
     const book = await Book.findById(bookId);
 
@@ -56,7 +56,7 @@ bookRouters.get('/:bookId', async (req: Request, res: Response) => {
 });
 
 // PATCH - Update book
-bookRouters.patch('/:bookId', async (req: Request, res: Response) => {
+bookRoutes.patch('/:bookId', async (req: Request, res: Response) => {
     const updatedBook = req.body;
     const bookId = req.params.bookId;
     const book = await Book.findByIdAndUpdate(bookId, updatedBook, {new: true});
@@ -69,7 +69,7 @@ bookRouters.patch('/:bookId', async (req: Request, res: Response) => {
 });
 
 // DELETE - Delete book
-bookRouters.delete('/:bookId', async (req: Request, res: Response) => {
+bookRoutes.delete('/:bookId', async (req: Request, res: Response) => {
     const bookId = req.params.bookId;
     const book = await Book.findByIdAndDelete(bookId);
 
