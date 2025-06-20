@@ -1,22 +1,39 @@
 import express, { Request, Response } from 'express';
 import { Book } from '../models/book.model';
 
-const bookRouters = express.Router();
+export const bookRouters = express.Router();
 
 // POST - Create book
 bookRouters.post('/', async (req: Request, res: Response) => {
-    const body = req.body;
-    const book = await Book.create(body);
+    try {
+        const body = req.body;
+        const book = await Book.create(body);
 
-    res.status(201).json({
-        success: true,
-        message: "Book created successfully",
-        data: book
-    });
+        res.status(201).json({
+            success: true,
+            message: "Book created successfully",
+            data: book
+        });
+    } catch (error: any) {
+        res.status(400).json({
+            success: false,
+            message: "Validation failed",
+            error: error
+        });
+    }
 });
 
 // GET - Retrieve sll books
 bookRouters.get('/', async (req: Request, res: Response) => {
+    const filter = req.query.filter ? req.query.filter : "";
+    const sortBy = req.query.sortBy ? req.query.sortBy : "";
+    const sortOrder = req.query.sort ? req.query.sort : "asc";
+    const limit = req.query.limit ? req.query.limit : 10;
+
+    // const books = await Book.find({genre: filter})
+    //     .sort({[sortBy]: sortOrder})
+    //     .limit(parseInt(limit));
+
     const books = await Book.find();
 
     res.status(201).json({
@@ -59,6 +76,6 @@ bookRouters.delete('/:bookId', async (req: Request, res: Response) => {
     res.status(201).json({
         success: true,
         message: "Book deleted successfully",
-        data: ""
+        data: null
     });
 });
