@@ -40,7 +40,7 @@ This project is ideal for learning how to build a full-featured API backend with
 
 
 ## Project Structure
-
+```
 library-management-system/
 ├── src/
 │   ├── app/
@@ -58,7 +58,7 @@ library-management-system/
 ├── package.json
 ├── tsconfig.json
 └── README.md
-
+```
 
 
 ## Data Models
