@@ -25,16 +25,16 @@ bookRoutes.post('/', async (req: Request, res: Response) => {
 
 // GET - Retrieve sll books
 bookRoutes.get('/', async (req: Request, res: Response) => {
-    const filter = req.query.filter ? req.query.filter : "";
-    const sortBy = req.query.sortBy ? req.query.sortBy : "";
-    const sortOrder = req.query.sort ? req.query.sort : "asc";
-    const limit = req.query.limit ? req.query.limit : 10;
+    const filter = typeof req.query.filter === 'string' ? req.query.filter : "";
+    const sortBy = typeof req.query.sortBy === 'string' ? req.query.sortBy : "title";
+    const sortOrder = typeof req.query.sort === 'string' ? req.query.sort : "asc";
+    const limit = typeof req.query.limit === 'string' ? parseInt(req.query.limit) : 10;
 
-    // const books = await Book.find({genre: filter})
-    //     .sort({[sortBy]: sortOrder})
-    //     .limit(parseInt(limit));
+    const books = await Book.find(filter ? { genre: filter } : {})
+            .sort({ [sortBy]: sortOrder === 'desc' ? -1 : 1 })
+            .limit(limit);
 
-    const books = await Book.find();
+    // const books = await Book.find();
 
     res.status(201).json({
         success: true,

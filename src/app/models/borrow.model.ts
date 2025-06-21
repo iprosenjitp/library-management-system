@@ -1,8 +1,8 @@
-import { model, Schema } from "mongoose";
-import { IBorrow } from "../interfaces/borrow.interface";
+import { Model, model, Schema } from "mongoose";
+import { IBorrow, UserInterfaceMethods } from "../interfaces/borrow.interface";
 import { Book } from "./book.model";
 
-const borrowSchema = new Schema<IBorrow> ({
+const borrowSchema = new Schema<IBorrow, Model<IBorrow>, UserInterfaceMethods> ({
     book: {
         type: Schema.Types.ObjectId,
         ref: "Book",
@@ -21,6 +21,25 @@ const borrowSchema = new Schema<IBorrow> ({
     versionKey: false,
     timestamps: true
 });
+
+// Interface methods
+borrowSchema.method('checkBookAvailability', async function checkBookAvailability(remainingCopies: number) {
+    // console.log("this", this);
+    // console.log("Remaining copies", remainingCopies);
+
+    const bookId = this.book;
+    const book = await Book.findById(bookId);
+
+    if(!book) {
+        throw new Error("Book not found");
+    }
+
+    if(remainingCopies === 0) {
+        book.available = false;
+    }
+
+    await book.save();
+})
 
 // Pre hooks
 borrowSchema.pre("save", async function(next) {
@@ -56,6 +75,9 @@ borrowSchema.post("save", async function (doc, next) {
     }
     
     book.copies -= doc.quantity;
+
+    this.checkBookAvailability(book.copies);
+
     await book.save();
 
     next();
