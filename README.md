@@ -156,3 +156,6 @@ Returns a summary of total borrowed quantities per book using aggregation.
 - Group borrow records by book ID
 - Sum up the total quantity borrowed
 - Populate book `title` and `isbn`
+
+
+**Author** - [Prosenjit Pal](https://www.linkedin.com/in/iprosenjitp/)
