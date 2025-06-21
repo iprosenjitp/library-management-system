@@ -63,7 +63,7 @@ library-management-system/
 ## Installation & Setup
 **Follow the steps below to set up and run the project locally:**
 
-**1. Clone the Repository** \
+**1. Clone the Repository** 
 ```
 git clone https://github.com/iprosenjitp/library-management-system.git
 cd library-management-system
@@ -110,3 +110,49 @@ The server will run at: ```http://localhost:5000```
 | `dueDate`  | Date     | ✅ Yes    | Date by which the book must be returned |
 
 
+## API Routes
+**Book Routes**
+| Method | Endpoint         | Description                                              |
+| ------ | ---------------- | -------------------------------------------------------- |
+| POST   | `/api/books`     | Add a new book                                           |
+| GET    | `/api/books`     | Get all books with filtering, sorting, and limit options |
+| GET    | `/api/books/:id` | Get a single book by ID                                  |
+| PATCH  | `/api/books/:id` | Update an existing book                                  |
+| DELETE | `/api/books/:id` | Delete a book                                            |
+
+**Query Parameters for `GET /api/books`:**
+- **filter:** Filter by genre (e.g., FANTASY)
+- **sortBy:** Field to sort by (e.g., createdAt)
+- **sort:** asc or desc
+- **limit:** Number of results to return (default: 10)
+
+**Borrow Routes**
+| Method | Endpoint      | Description                                   |
+| ------ | ------------- | --------------------------------------------- |
+| POST   | `/api/borrow` | Borrow a book with quantity and due date      |
+| GET    | `/api/borrow` | Get borrowed books summary (with aggregation) |
+
+**Borrow a Book**
+`POST /api/borrow`
+
+Borrows a specific book after checking availability.
+
+**Business Logic:**
+- Checks if enough copies of the book are available.
+- Deducts the requested quantity from the book's total copies.
+- If copies become 0, updates available to false.
+- Saves the borrow record with details.
+
+**Borrowed Books Summary**
+`GET /api/borrow`
+
+Returns a summary of total borrowed quantities per book using aggregation.
+
+**Purpose:**
+- Show how many times each book has been borrowed and in what quantity.
+- Useful for analytics or dashboard insights.
+
+**Aggregation Logic:**
+- Group borrow records by book ID
+- Sum up the total quantity borrowed
+- Populate book `title` and `isbn`
