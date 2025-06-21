@@ -158,4 +158,5 @@ Returns a summary of total borrowed quantities per book using aggregation.
 - Populate book `title` and `isbn`
 
 
-**Author** - [Prosenjit Pal](https://www.linkedin.com/in/iprosenjitp/)
+### Author 
+[Prosenjit Pal](https://www.linkedin.com/in/iprosenjitp/)
