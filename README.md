@@ -60,6 +60,44 @@ library-management-system/
 └── README.md
 ```
 
+## Installation & Setup
+**Follow the steps below to set up and run the project locally:**
+
+**1. Clone the Repository**
+```
+git clone https://github.com/iprosenjitp/library-management-system.git
+cd your-repo-name
+```
+
+**2. Install Dependencies**
+Make sure you have Node.js and npm installed.
+```
+npm install
+```
+
+**3. Connect MongoDB**
+Open `src/app/server.ts` and replace the MongoDB URI:
+
+```await mongoose.connect("YOUR_MONGODB_URI");```
+
+
+**4. Start the Server**
+```npm run dev```
+
+The server will run at: ```http://localhost:5000```
+
+For production:
+
+bash
+Copy
+Edit
+npm start
+For development (with hot-reloading):
+
+bash
+Copy
+Edit
+npm run dev
 
 ## Data Models
 
