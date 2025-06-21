@@ -49,16 +49,16 @@ This project is ideal for learning how to build a full-featured API backend with
 
 ## Tech Stack:
 
-**Backend:** Express.js
-**Language:** TypeScript
-**Database:** MongoDB with Mongoose ODM
-**Build Tool:** TypeScript Compiler (tsc)
+**Backend:** Express.js \
+**Language:** TypeScript \
+**Database:** MongoDB with Mongoose \
+**Build Tool:** TypeScript Compiler (tsc) \
 **Validation & Logic:** Mongoose schema, methods, and middleware
 
 
-🧱 Data Models
+## Data Models
 
-📘 Book Model
+**Book Model**
 | Field         | Type    | Required | Validation / Notes                                                  |
 | ------------- | ------- | -------- | ------------------------------------------------------------------- |
 | `title`       | String  | ✅ Yes    | Title of the book                                                   |
@@ -70,7 +70,7 @@ This project is ideal for learning how to build a full-featured API backend with
 | `available`   | Boolean | ❌ No     | Defaults to `true`. Updated automatically based on copies           |
 
 
-📦 Borrow Model
+**Borrow Model**
 | Field      | Type     | Required  | Validation / Notes                      |
 | ---------- | -------- | --------- | --------------------------------------- |
 | `book`     | ObjectId | ✅ Yes    | References the `Book` model             |
