@@ -47,6 +47,15 @@ This project is ideal for learning how to build a full-featured API backend with
     - Aggregation pipeline for filtered/sorted book queries
 
 
+## Tech Stack:
+
+**Backend:** Express.js
+**Language:** TypeScript
+**Database:** MongoDB with Mongoose ODM
+**Build Tool:** TypeScript Compiler (tsc)
+**Validation & Logic:** Mongoose schema, methods, and middleware
+
+
 🧱 Data Models
 
 📘 Book Model
